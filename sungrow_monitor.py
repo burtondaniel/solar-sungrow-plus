@@ -22,7 +22,7 @@
 
 from pymodbus.payload import BinaryPayloadDecoder
 from pymodbus.constants import Endian
-from pymodbus.client.sync import ModbusTcpClient
+from pymodbus.client import ModbusTcpClient
 from pytz import timezone
 import config
 import json
@@ -93,7 +93,7 @@ def load_register(registers):
     try:
       received = client.read_input_registers(address=startPos,
                                              count=sungrow_moddatatype[data_type],
-                                              unit=config.slave)
+                                              slave=config.slave)
     except:
       thisdate = str(datetime.datetime.now(timezone(config.timezone))).partition('.')[0]
       thiserrormessage = thisdate + ': Connection not possible. Check settings or connection.'
